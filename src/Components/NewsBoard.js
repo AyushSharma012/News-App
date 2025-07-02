@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import NewsItem from "./NewsItem";
 
-function NewsBoard() {
+function NewsBoard({category}) {
 
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    let url = `https://newsdata.io/api/1/latest?apikey=${process.env.REACT_APP_API_KEY}&country=in`;
+    let url = `https://newsdata.io/api/1/latest?apikey=${process.env.REACT_APP_API_KEY}&country=in&category=${category}`;
 
     fetch(url)
       .then(response => response.json())
@@ -18,7 +18,7 @@ function NewsBoard() {
         );
         setResults(filtered);
       });
-  }, []);
+  }, [category]);
 
   return (
     <div className="container my-4">
